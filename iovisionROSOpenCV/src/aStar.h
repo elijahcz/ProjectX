@@ -9,8 +9,8 @@
 
 using namespace std;
 
-const int n=20; // horizontal size of the map
-const int m=10; // vertical size size of the map
+const int n=11; // horizontal size of the map
+const int m=8; // vertical size size of the map
 static int thismap[n][m];
 static int closednodesmap[n][m]; // map of closed (tried-out) nodes
 static int opennodesmap[n][m]; // map of open (not-yet-tried) nodes
@@ -47,7 +47,8 @@ class node
         // give better priority to going strait instead of diagonally
         void nextLevel(const int & i) // i: direction
         {
-             level+=(dir==8?(i%2==0?10:14):10);
+             //level+=(dir==8?(i%2==0?10:14):10);
+            level+=0.10;
         }
 
         // Estimation function for the remaining distance to the goal.
