@@ -68,14 +68,14 @@ public:
 	void moveRightwards(double speed)
 	{
 		cmdvel.linear.x = 0;
-		cmdvel.angular.z = speed;
+		cmdvel.angular.z = -speed*2;
 		pub.publish(cmdvel);
 	}
 
 	void moveLeftwards(double speed)
 	{
 		cmdvel.linear.x = 0;
-		cmdvel.angular.z = speed;
+		cmdvel.angular.z = speed*2;
 		pub.publish(cmdvel);
 	}
 
@@ -92,60 +92,160 @@ public:
         // E --> 2
         // W --> 3
 
-	   void execute_nextstep(int nextStep, int pointing2, double speed)
+	void execute_nextstep(int nextStep, int pointing2, double speed)
     {
+        cout << "nextStep: " << nextStep <<", pointing at: " << pointing2 << endl;
+        
         if( nextStep == 0 && pointing2 == 2) //North
         {
+            cout << "Moving forwards, north" << endl;
             moveForwards(speed);
         }
         else if (nextStep == 0 && ((pointing2 == 3) || (pointing2 == 4) || (pointing2 == 5) || (pointing2 == 6)))
         {
+            cout << "Moving rightwards, north" << endl;
             moveRightwards(speed);
         }
         else if (nextStep == 0 && ( (pointing2 == 1) || (pointing2 == 0) || (pointing2 == 7) ) )
         {
+            cout << "Moving leftwards, north" << endl;
             moveLeftwards(speed);
         }
 
         if( nextStep == 1 && pointing2 == 6) //South
         {
+            cout << "Moving forwards, south" << endl;
             moveForwards(speed);
         }
         else if (nextStep == 1 && ((pointing2 == 7) || (pointing2 == 0) || (pointing2 == 1) || (pointing2 == 2)))
         {
+            cout << "Moving rightwards, south" << endl;
             moveRightwards(speed);
         }
         else if (nextStep == 1 && ((pointing2 == 5) || (pointing2 == 4) || (pointing2 == 3)))
         {
+            cout << "Moving leftwards, south" << endl;
             moveLeftwards(speed);
         }
 
         if( nextStep == 2 && pointing2 == 0) // East
         {
+            cout << "Moving forwards, east" << endl;
             moveForwards(speed);
         }
         else if (nextStep == 2 && ((pointing2 == 1) || (pointing2 == 2) || (pointing2 == 3) || (pointing2 == 4)))
         {
+            cout << "Moving rightwards, east" << endl;
             moveRightwards(speed);
         }
         else if (nextStep == 2 && ((pointing2 == 7) || (pointing2 == 6) || (pointing2 == 5)))
         {
+            cout << "Moving leftwards, east" << endl;
             moveLeftwards(speed);
         }
 
         if( nextStep == 3 && pointing2 == 4) //West
         {
+            cout << "Moving forwards, west" << endl;
             moveForwards(speed);
         }
         else if (nextStep == 3 && ((pointing2 == 5) || (pointing2 == 6) || (pointing2 == 7) || (pointing2 == 0)))
         {
+            cout << "Moving rightwards, west" << endl;
             moveRightwards(speed);
         }
         else if (nextStep == 3 && ((pointing2 == 3) || (pointing2 == 2) || (pointing2 == 1)))
         {
+            cout << "Moving leftwards, west" << endl;
             moveLeftwards(speed);
         }
     }
+       /*
+        void execute_nextstep(int nextStep, int pointing2, double speed)
+    {
+        cout << "nextStep: " << nextStep <<", pointing at: " << pointing2 << endl;
+        
+        if( nextStep == 0 && pointing2 == 2) //North
+        {
+            cout << "Moving forwards, north" << endl;
+            moveForwards(speed);
+        }
+        else if ( nextStep == 0 && ( (pointing2 == 3) || (pointing2 == 4) ) )
+        {
+            cout << "Moving rightwards, north" << endl;
+            moveRightwards(speed);
+        }
+        
+        else if ( nextStep == 0 && pointing2 == 5 )
+        {
+            cout << "Moving rightwards, north" << endl;
+            moveLeftwards(speed);
+        }
+
+        else if (nextStep == 0 && ( (pointing2 == 1) || (pointing2 == 0) || (pointing2 == 7) ) )
+        {
+            cout << "Moving leftwards, north" << endl;
+            moveLeftwards(speed);
+        }
+
+        
+        else if (nextStep == 0 && ( (pointing2 == 1) || (pointing2 == 0) || (pointing2 == 7) ) )
+        {
+            cout << "Moving leftwards, north" << endl;
+            moveLeftwards(speed);
+        }
+
+
+
+
+        if( nextStep == 1 && pointing2 == 6) //South
+        {
+            cout << "Moving forwards, south" << endl;
+            moveForwards(speed);
+        }
+        else if (nextStep == 1 && ((pointing2 == 7) || (pointing2 == 0) || (pointing2 == 1) || (pointing2 == 2)))
+        {
+            cout << "Moving rightwards, south" << endl;
+            moveRightwards(speed);
+        }
+        else if (nextStep == 1 && ((pointing2 == 5) || (pointing2 == 4) || (pointing2 == 3)))
+        {
+            cout << "Moving leftwards, south" << endl;
+            moveLeftwards(speed);
+        }
+
+        if( nextStep == 2 && pointing2 == 0) // East
+        {
+            cout << "Moving forwards, east" << endl;
+            moveForwards(speed);
+        }
+        else if (nextStep == 2 && ((pointing2 == 1) || (pointing2 == 2) || (pointing2 == 3) || (pointing2 == 4)))
+        {
+            cout << "Moving rightwards, east" << endl;
+            moveRightwards(speed);
+        }
+        else if (nextStep == 2 && ((pointing2 == 7) || (pointing2 == 6) || (pointing2 == 5)))
+        {
+            cout << "Moving leftwards, east" << endl;
+            moveLeftwards(speed);
+        }
+
+        if( nextStep == 3 && pointing2 == 4) //West
+        {
+            cout << "Moving forwards, west" << endl;
+            moveForwards(speed);
+        }
+        else if (nextStep == 3 && ((pointing2 == 5) || (pointing2 == 6) || (pointing2 == 7) || (pointing2 == 0)))
+        {
+            cout << "Moving rightwards, west" << endl;
+            moveRightwards(speed);
+        }
+        else if (nextStep == 3 && ((pointing2 == 3) || (pointing2 == 2) || (pointing2 == 1)))
+        {
+            cout << "Moving leftwards, west" << endl;
+            moveLeftwards(speed);
+        }
+    }*/
 
 };
 
@@ -248,6 +348,7 @@ int main(int argc, char** argv)
     cout << "\nHit 'q' to exit...\n";
 
     char ch = 0;
+    bool flag = false;
 
     double ticks = 0;
     bool found = false;
@@ -321,9 +422,11 @@ int main(int argc, char** argv)
         //cv::inRange(frmHsv2, cv::Scalar(126,89,0),
         //            cv::Scalar(179, 255, 255), rangeResOrange);
     	//Orange detection parameters 13:55q
-        //cv::inRange(frmHsv2, cv::Scalar(0,91,183), //Really good parameters at 15:00 of november
+        
+        //cv::inRange(frmHsv2, cv::Scalar(0,108,210), //Really good parameters at 15:00 of november
         //            cv::Scalar(179, 255, 255), rangeResOrange);
-        cv::inRange(frmHsv2, cv::Scalar(0,97,205), // Really really good parameters at 17:23 of november, and it doesn't detect blue triangle
+        
+        cv::inRange(frmHsv2, cv::Scalar(0,97,220), // Really really good parameters at 17:23 of november, and it doesn't detect blue triangle
                                     cv::Scalar(179, 255, 255), rangeResOrange);
         // <<<<< Color Thresholding
 
@@ -353,6 +456,7 @@ int main(int argc, char** argv)
 
         cv::Point triCenter;
         cv::Point triEdge;
+        string facing;
 
         //cout << "Triangle detection. Press Enter to continue" << endl;
         //cin.get();
@@ -454,56 +558,163 @@ int main(int argc, char** argv)
 	                //angle << atan2(triEdge.y-triCenter.y,triEdge.x-triCenter.x);
 	                //angle << -1*(atan2(triEdge.y-triCenter.y,triEdge.x-triCenter.x)*180 / PI);
 	                direction = -1 * (atan2(triEdge.y-triCenter.y,triEdge.x-triCenter.x)*180 / PI);
-
-                    if ( (direction <= 22.5) & (direction >= -22.5) )
+                    //direction = (atan2(triEdge.y-triCenter.y,triEdge.x-triCenter.x)*180 / PI);
+                    if ( (direction <= 5) && (direction > -5) )
                     {
                         pointingdirection = 0;
+                        facing = "East";
                         cv::putText(res, "East",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction < 67.5 & direction > 22.5)
+                    else if(direction <= 85 && direction > 5)
                     {
                         pointingdirection = 1;
+                        facing = "North-East";
                         cv::putText(res, "North-East",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction <= 112.5 && direction >= 67.5)
+                    else if(direction <= 95 && direction > 85)
                     {
                         pointingdirection = 2;
+                        facing = "North";
                         cv::putText(res, "North",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction < 157.5 & direction > 112.5)
+                    else if(direction <= 175 && direction > 95)
                     {
                         pointingdirection = 3;
+                        facing = "North-West";
                         cv::putText(res, "North-West",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction >= 157.5 || direction <= -157.5)
+                    else if(direction >= 175 || direction < -175)
                     {
                         pointingdirection = 4;
+                        facing = "West";
                         cv::putText(res, "West",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction < -22.5 & direction > -67.5)
+                    else if(direction <= -95 && direction > -175)
                     {
                         pointingdirection = 5;
+                        facing = "South-West";
                         cv::putText(res, "South-West",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction <= -67.5 & direction >= -112.5)
+                    else if(direction <= -85 && direction > -95)
                     {
                         pointingdirection = 6;
+                        facing = "South";
                         cv::putText(res, "South",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
-                    else if(direction < -112.5 & direction > -157.5)
+                    else if(direction <= -5 && direction > -85)
                     {
                         pointingdirection = 7;
+                        facing = "South-East";
                         cv::putText(res, "South-East",
                             triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
                     }
 
+/*                    if ( (direction <= 15) && (direction > -15) )
+                    {
+                        pointingdirection = 0;
+                        facing = "East";
+                        cv::putText(res, "East",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= 75 && direction > 15)
+                    {
+                        pointingdirection = 1;
+                        facing = "North-East";
+                        cv::putText(res, "North-East",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= 105 && direction > 75)
+                    {
+                        pointingdirection = 2;
+                        facing = "North";
+                        cv::putText(res, "North",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= 165 && direction > 105)
+                    {
+                        pointingdirection = 3;
+                        facing = "North-West";
+                        cv::putText(res, "North-West",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction >= 165 || direction < -165)
+                    {
+                        pointingdirection = 4;
+                        facing = "West";
+                        cv::putText(res, "West",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= -105 && direction > -165)
+                    {
+                        pointingdirection = 5;
+                        facing = "South-West";
+                        cv::putText(res, "South-West",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= -75 && direction > -105)
+                    {
+                        pointingdirection = 6;
+                        facing = "South";
+                        cv::putText(res, "South",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+                    else if(direction <= -15 && direction > -75)
+                    {
+                        pointingdirection = 7;
+                        facing = "South-East";
+                        cv::putText(res, "South-East",
+                            triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }
+/*
+
+                    if ((direction <= 22.5) && (direction >= -22.5)){
+                            pointingdirection = 0;
+                            facing = "East";
+                            cv::putText(res, "East",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction < 67.5 && direction > 22.5){
+                            pointingdirection = 1;
+                            facing = "North-East";
+                            cv::putText(res, "North-East",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction <= 112.5 && direction >= 67.5){
+                            pointingdirection = 2;
+                            facing = "North";
+                            cv::putText(res, "North",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction < 157.5 && direction > 112.5){
+                            pointingdirection = 3;
+                            facing = "North-West";
+                            cv::putText(res, "North-West",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction >= 157.5 || direction <= -157.5){
+                            pointingdirection = 4;
+                            facing = "West";                            
+                            cv::putText(res, "West",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction < -22.5 && direction > -67.5){
+                            pointingdirection = 5;
+                            facing = "South-East";                            
+                            cv::putText(res, "South-West",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction <= -67.5 && direction >= -112.5){
+                            pointingdirection = 6;
+                            facing = "South";                            
+                            cv::putText(res, "South",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }else if(direction < -112.5 && direction > -157.5){
+                            pointingdirection = 7;
+                            facing = "South-East";                            
+                            cv::putText(res, "South-East",
+                                    triEdge, cv::FONT_HERSHEY_SIMPLEX, 0.7, CV_RGB(255,0,255), 2);
+                    }*/
            		}
         	}
             else
@@ -559,8 +770,8 @@ int main(int argc, char** argv)
        //Drawing grid
         int width = res.size().width;
         int height = res.size().height;
-        int rows = 10;
-        int columns = 20;
+        int rows = 8;
+        int columns = 11;
         int w = width/columns;
         int h = height/rows;
         for (int i=0; i<height; i+=h)
@@ -612,6 +823,7 @@ int main(int argc, char** argv)
     	}
         for (int n = 0; n<rows; n++)
         {
+            cv::Point obCoordinate;
 		    for (int m = 0; m<columns; m++)
 		    {
 				if(main_matrix[n][m]==2)
@@ -621,12 +833,23 @@ int main(int argc, char** argv)
 						for ( int j = max(m-1,0); j<=min(m+1,columns); j++)
 						{
 							main_matrix[i][j]=1;
+                            obCoordinate = cv::Point((2*w*m+w)/2, (2*h*n+h)/2);
+                          //Drawing caution points
+                          cv::circle(res, cv::Point(obCoordinate.x+w, obCoordinate.y), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x-w, obCoordinate.y), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x-w, obCoordinate.y-h), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x+w, obCoordinate.y-h), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x, obCoordinate.y+h), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x+w, obCoordinate.y+h), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x-w, obCoordinate.y+h), 5, CV_RGB(255,165,0), -1);
+                          cv::circle(res, cv::Point(obCoordinate.x, obCoordinate.y-h), 5, CV_RGB(255,165,0), -1);
 						}
 					}
 				}
 			}
 		}
-		int temp_matrix[20][10];
+
+		int temp_matrix[11][8];
 		for(int y=0;y<rows;y++)
 		{
         	for(int x = 0; x < columns; x++ )
@@ -634,7 +857,8 @@ int main(int argc, char** argv)
         		temp_matrix[x][y]=main_matrix[y][x];
         	}
 		}
-    	/*for (int n=0; n<rows; n++)
+
+    	for (int n=0; n<rows; n++)
     	{
             for (int m=0; m<columns; m++)
             {
@@ -651,7 +875,7 @@ int main(int argc, char** argv)
             	}
             }
             //cout << endl;
-    	}*/
+    	}
 
         main_matrix[(int) floor(triCenter.y/h)][(int) floor(triCenter.x/w)]=3;
 		for (int n=0; n<rows; n++)
@@ -671,14 +895,101 @@ int main(int argc, char** argv)
 			cout << endl;
 		}
 
-		int startx = floor(triCenter.x/w);
-		int starty = floor(triCenter.y/h);
-		int finishx =0;
-		int finishy =0;
+          int startx = floor(triCenter.x/w);
+          int starty = floor(triCenter.y/h);
+          int finishx;
+          int finishy;
+        //in case flag = true
+        if(flag){
+          finishx = 3;
+		  finishy = 3;
+        }else{
+          finishx = 8;
+          finishy = 2;
+        }
+        if (startx == 0 && starty == 0){
+            startx = finishx;
+            starty = finishy;
+        }
 
 		string path = aStar(temp_matrix,startx,starty,finishx,finishy);
 		cout<<"Route:"<<endl;
 		cout<<path<<endl<<endl;
+
+        cv::Point startCoordinate = triCenter;
+        cv::Point nextCoordinate;
+
+        for (int n=0; n<rows; n++)
+        {
+            for (int m=0; m<columns; m++)
+            {
+                if(px > w * m && px <= w*(m+1) && py > h * n && py <= h*(n+1) && path.length()>0)
+                {
+                    //Declarar la nueva coordenada de inicio, segun la ubicacion del centroide, ubicarla en el centro del rectangulo
+                    startCoordinate = cv::Point((2*w*m+w)/2, (2*h*n+h)/2);
+                    cv::circle(res, startCoordinate, 5, CV_RGB(255,0,0), -1);
+
+                    //                  for(int i=0; i<=path.length(); i++){
+                    //                      cout<<"Path por separado: "<< path.at(i);
+                    //                      if(selectedChar == "L"){
+                    //                          nextCoordinate = cv::Point((2*w*m-w)/2, (2*h*n+h)/2);
+
+                    // Get the following coordinate
+                    for(int i=0;i<path.length();i++)
+                    {
+                        char selectedChar = path.at(i);
+                        if(selectedChar == 'W'){
+                            //nextCoordinate = cv::Point((2*w*m-w)/2, (2*h*n+h)/2);
+                            nextCoordinate = cv::Point(startCoordinate.x - w, startCoordinate.y);
+                            cv::line(res,startCoordinate,nextCoordinate, CV_RGB(0,255,0),2);
+                            cv::circle(res, nextCoordinate, 5, CV_RGB(255,0,0), -1);
+                            startCoordinate = nextCoordinate;
+                            //cout<<"Encontre un W"<< path.at(i);
+                        }
+                        else if(selectedChar == 'N'){
+                            nextCoordinate = cv::Point(startCoordinate.x, startCoordinate.y-h);
+                            cv::line(res,startCoordinate,nextCoordinate, CV_RGB(0,255,0),2);
+                            cv::circle(res, nextCoordinate, 5, CV_RGB(255,0,0), -1);
+                            startCoordinate = nextCoordinate;
+                            //cv::circle(res, startCoordinate, 10, CV_RGB(255,0,0), -1);
+                            //cout<<"Encontre un N"<< path.at(i);
+                        }
+                        else if(selectedChar == 'S'){
+                            nextCoordinate = cv::Point(startCoordinate.x, startCoordinate.y+h);
+                            cv::line(res,startCoordinate,nextCoordinate, CV_RGB(0,255,0),2);
+                            cv::circle(res, nextCoordinate, 5, CV_RGB(255,0,0), -1);
+                            startCoordinate = nextCoordinate;
+                            //cv::circle(res, startCoordinate, 10, CV_RGB(255,0,0), -1);
+                            //cout<<"Encontre un S"<< path.at(i);
+                        }
+                        else {
+                            nextCoordinate = cv::Point(startCoordinate.x+w, startCoordinate.y);
+                            cv::line(res,startCoordinate,nextCoordinate, CV_RGB(0,255,0),2);
+                            cv::circle(res, nextCoordinate, 5, CV_RGB(255,0,0), -1);
+                            startCoordinate = nextCoordinate;
+                        }
+
+
+
+                    }
+
+
+
+                //cout << main_matrix[n][m];
+                //cout << "valor w: " <<w*(m+1) <<" m= " << m << "valor h: " << h*(n+1) <<endl;
+                }
+                else
+                {
+                //cout << main_matrix[n][m] ;
+                //cout << "valor w: " <<w*(m+1) <<" m= " << m << "valor h: " << h*(n+1) <<endl;
+                }
+
+
+            }
+        //cout << endl;
+        }
+
+
 
         // >>>>> Filtering
         vector<vector<cv::Point> > balls;
@@ -686,7 +997,7 @@ int main(int argc, char** argv)
 
         int nextStep;
         //int onRouteFlag;
-        double speed = 0.5;
+        double speed = 0.4;
 
 
         //-------------------------------------------------------------------------------------------
@@ -700,25 +1011,33 @@ int main(int argc, char** argv)
         // S --> 1
         // E --> 2
         // W --> 3
-        // Trasposing "stepsStream" stream first character into an input value for nextStep:
+        // Trasposing "path" stream first character into an input value for nextStep:
+        
+
+
         if (path.size() > 0)
         {
-            if (path.at(1) ==  'N')
-            {
-                nextStep == 0;
+            //cout << "Path.at(1):" << path.at(1) << endl;
+            
+            //int dir = (int) path.at(1) - '0';
+            //Path values
+            //'2','W'
+            //'3','N'
+            //'0','E'
+            //'1','S'
+            //cout << "dir: " << dir << endl;
+
+            
+            if (path.at(0)=='N'){
+                nextStep = 0;
+            }else if (path.at(0) == 'S'){
+                nextStep = 1;
+            }else if (path.at(0) == 'E'){
+                nextStep = 2;
+            }else if (path.at(0) == 'W'){
+                nextStep =3;
             }
-            else if (path.at(1) ==  'S')
-            {
-                nextStep == 1;
-            }
-            else if (path.at(1) ==  'E')
-            {
-                nextStep == 2;
-            }
-            else if (path.at(1) ==  'W')
-            {
-                nextStep == 3;
-            }
+            cout << "nextStep: " << nextStep << ", Path.at(0):" << path.at(0) <<", pointing at: " << facing << endl;
 
             jaguarmoving.execute_nextstep(nextStep, pointingdirection, speed);
         }
@@ -832,9 +1151,15 @@ int main(int argc, char** argv)
 
         // User key
         ch = cv::waitKey(1);
+        //cout << "char read: " << ch << endl;
+        //cout << "Flag status: " << flag << endl;
+        if(ch == 'r' || ch == 'R'){
+            flag = true;
+        }else if (ch == 'b' || ch == 'B'){
+            flag= false;
+        }
     }
     // <<<<< Main loop
     return EXIT_SUCCESS;
 }
-
 
