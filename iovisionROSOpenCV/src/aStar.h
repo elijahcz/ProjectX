@@ -48,7 +48,8 @@ class node
         void nextLevel(const int & i) // i: direction
         {
              //level+=(dir==8?(i%2==0?10:14):10);
-            level+=0.10;
+             level+=(dir==8?(i%2==0?10:14):-10);
+            
         }
 
         // Estimation function for the remaining distance to the goal.
@@ -59,7 +60,10 @@ class node
             yd=yDest-yPos;
 
             // Euclidian Distance
-            d=static_cast<int>(sqrt(xd*xd+yd*yd));
+            //d=static_cast<int>(sqrt(xd*xd+yd*yd));
+
+            //Manhatan distance
+            d=abs(xd)+abs(yd);
 
             return(d);
         }
